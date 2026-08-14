@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <defs><filter id="g"><feGaussianBlur stdDeviation="1.4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+  <path d="M25 45 18 12l25 17c10-6 24-6 34 0l25-17-7 33c6 8 9 17 9 27 0 24-20 39-44 39S16 96 16 72c0-10 3-19 9-27Z" fill="#171219" stroke="#9f57ff" stroke-width="4" filter="url(#g)"/>
+  <path d="M28 39 23 20l15 11M92 39l5-19-15 11" fill="none" stroke="#d6b1ff" stroke-width="2" opacity=".8"/>
+  <ellipse cx="44" cy="64" rx="10" ry="12" fill="#f6d354"/><ellipse cx="76" cy="64" rx="10" ry="12" fill="#f6d354"/>
+  <ellipse cx="44" cy="64" rx="4" ry="8" fill="#130f15"/><ellipse cx="76" cy="64" rx="4" ry="8" fill="#130f15"/>
+  <circle cx="41" cy="60" r="2" fill="#fff"/><circle cx="73" cy="60" r="2" fill="#fff"/>
+  <path d="M56 77 60 81l4-4-4-3Z" fill="#c77a96"/><path d="M60 81c-6 5-10 5-14 2M60 81c6 5 10 5 14 2" fill="none" stroke="#d6b1ff" stroke-width="2" stroke-linecap="round"/>
+  <path d="M39 79 15 75M39 84 12 85M81 79l24-4M81 84l27 1" stroke="#b9a3c8" stroke-width="2" stroke-linecap="round" opacity=".85"/>
+</svg>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Coisas de Gatinhas — crochê, carinho e ronrons.">
+  <title>Coisas de Gatinhas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="coisasdegatinhasstyle.css">
+</head>
+<body class="loja-v2">
+  <div class="barra-promo" id="barraPromo">♡ 10% OFF na primeira compra com o cupom: <strong>PRIMEIRAGATINHA</strong></div>
+  <header class="header-v2">
+    <a href="coisasdegatinhasindex.html" class="logo-v2"><img src="assets/logo-coisas-de-gatinhas.jpeg" alt="Coisas de Gatinhas"></a>
+    <nav class="nav-v2">
+      <a class="ativo" href="coisasdegatinhasindex.html">Início</a>
+      <a href="produtos.html">Produtos</a>
+      <a href="produtos.html?cat=Kit">Kits</a>
+      <a href="produtos.html?promo=1">Promoções</a>
+      <a href="#historia">Nossa História</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <div class="acoes-v2"><span>⌕</span><span>♡</span><a href="checkout.html">🛍 <b id="carrinhoContador">0</b></a></div>
+  </header>
+
+  <main>
+    <section class="hero-v2">
+      <div class="hero-copy-v2">
+        <span class="micro-tag">FEITO COM AMOR ♡</span>
+        <h1>Feito com amor<br>para fazer parte dos<br><em>melhores momentos</em></h1>
+        <p>Produtos artesanais, seguros e cheios de carinho para deixar o dia a dia da sua gatinha ainda mais especial.</p>
+        <div class="hero-botoes"><a class="btn-v2" href="produtos.html">Conheça nossos produtos 🐾</a><a class="btn-v2 secundario" href="#historia">Nossa história ♡</a></div>
+      </div>
+      <div class="hero-foto-v2"><img src="assets/hero-gatinhas.png" alt="As gatinhas da Coisas de Gatinhas com brinquedos de crochê"><div class="hero-note">🐾<br>Cada detalhe<br>feito pensando<br>no bem-estar<br>da sua gatinha.<br>♡</div></div>
+    </section>
+
+    <section class="beneficios-v2">
+      <div><i>♢</i><span><b>Materiais seguros</b><small>e não tóxicos</small></span></div>
+      <div><i>▣</i><span><b>Envio com carinho</b><small>para todo o Brasil</small></span></div>
+      <div><i>♡</i><span><b>Feito à mão</b><small>com muito amor</small></span></div>
+      <div><i>◉</i><span><b>Dúvidas?</b><small>Fale com a gente</small></span></div>
+    </section>
+
+    <section class="game-lab" id="brinque">
+      <div class="game-lab-head">
+        <div><span class="micro-tag">INTERATIVO • CAT LAB</span><h2>Brinque com as gatinhas</h2><p>Escolha uma das duas e brinque direto na página.</p></div>
+        <div class="game-tabs" role="tablist" aria-label="Escolha a gatinha"><button class="game-tab ativo" data-mode="furia">Fúria</button><button class="game-tab" data-mode="suspiro">Suspiro</button></div>
+      </div>
+
+      <div class="game-mode game-furia ativo" id="modeFuria">
+        <aside class="game-side dark">
+          <div class="mini-game-icon">🎮</div>
+          <h3>Brinque com<br>as gatinhas</h3>
+          <p>Colete os brilhinhos com a Fúria e suba de nível!</p>
+          <div class="game-stats">
+            <div><small>🐾 PONTOS</small><b id="furiaScore">540</b></div>
+            <div><small>✦ NÍVEL</small><b id="furiaLevel">3</b></div>
+          </div>
+          <small class="level-label">Próximo nível <span id="furiaPercent">70%</span></small>
+          <div class="level-track"><i id="furiaProgress" style="width:70%"></i></div>
+        </aside>
+        <div class="neon-board" id="furiaBoard">
+          <div class="scanline"></div>
+          <div class="furia-avatar game-avatar" id="furiaAvatar"><img src="assets/avatar-furia.svg" alt="Avatar da Fúria"></div>
+          <button class="spark s1" type="button" aria-label="Brilho">✦</button><button class="spark s2" type="button" aria-label="Brilho">✦</button><button class="spark s3" type="button" aria-label="Brilho">✦</button><button class="spark s4" type="button" aria-label="Brilho">✦</button>
+          <span class="game-tip">✦ Dica: quanto mais brilhinhos, mais pontos!</span>
+        </div>
+      </div>
+
+      <div class="game-mode game-suspiro" id="modeSuspiro">
+        <aside class="game-side light">
+          <div class="mini-game-icon cozy">🐾</div>
+          <h3>Brinque com<br>a Suspiro</h3>
+          <p>Mova o mouse pelo espaço: ele guia a Suspiro. Clique para soltar uma bolinha e ela corre para buscar.</p>
+          <div class="game-stats cozy"><div><small>🐾 PONTOS</small><b id="suspiroScore">0</b></div><div><small>🧶 BOLINHAS</small><b id="suspiroBalls">0</b></div></div>
+        </aside>
+        <div class="cozy-board" id="suspiroBoard">
+          <div class="room-wall"></div><div class="room-rug"></div><div class="room-bed"></div><div class="room-plant">♧</div><div class="room-scratcher"></div>
+          <div class="suspiro-avatar game-avatar" id="suspiroAvatar"><img src="assets/avatar-suspiro.svg" alt="Avatar da Suspiro"></div>
+          <div class="yarn-ball" id="suspiroBall" aria-hidden="true">🧶</div>
+          <span class="game-tip cozy-tip">mova o mouse para guiar • clique para jogar a bolinha ♡</span>
+        </div>
+      </div>
+    </section>
+    <section class="categorias-v2">
+      <a href="produtos.html?cat=Sousplat"><i>🐱</i><span>Sousplats</span></a>
+      <a href="produtos.html?cat=Bolinha"><i>🧶</i><span>Bolinhas de Crochê</span></a>
+      <a href="produtos.html?cat=Varetinha"><i>♡↗</i><span>Varetinhas</span></a>
+      <a href="produtos.html?cat=Kit"><i>🎁</i><span>Kits</span></a>
+      <a href="produtos.html?promo=1"><i>🏷</i><span>Promoções</span></a>
+    </section>
+
+    <section class="historia-v2" id="historia">
+      <div><span class="micro-tag">NOSSA HISTÓRIA ♡</span><h2>Suspiro & Fúria 🐾</h2><h3>inspiração que virou amor,<br>amor que virou marca.</h3><p>Elas chegaram e transformaram tudo. Cada produto é criado com o mesmo carinho que elas nos dão todos os dias. Porque aqui, tudo é feito para gatinhas e por quem ama gatinhas.</p><a class="btn-v2 secundario" href="produtos.html">Conheça a coleção ♡</a></div>
+      <img src="assets/hero-gatinhas.png" alt="Suspiro e Fúria juntas">
+    </section>
+
+    <section class="rodape-beneficios"><div>🚚 <b>Frete rápido e seguro</b><small>Para todo o Brasil</small></div><div>🔒 <b>Compra 100% segura</b><small>Ambiente protegido</small></div><div>💳 <b>Pagamento facilitado</b><small>PIX</small></div><div>♡ <b>Atendimento com amor</b><small>Fale com a gente</small></div></section>
+  </main>
+
+  <footer class="footer-v2" id="contato"><div class="footer-brand"><img src="assets/logo-coisas-de-gatinhas.jpeg" alt="Coisas de Gatinhas"><p>Feito com amor da Suspiro & Fúria<br>para o seu companheirinho.</p></div><div><b>Institucional</b><a href="#historia">Nossa História</a><a href="produtos.html">Produtos</a><a href="admin.html">Administradora</a></div><div><b>Ajuda</b><a href="checkout.html">Como Comprar</a><a href="#contato">Trocas e Devoluções</a><a href="#contato">Fale Conosco</a></div><div><b>Newsletter</b><p>Receba novidades e promoções exclusivas ♡</p><div class="newsletter"><input placeholder="Seu melhor e-mail"><button>→</button></div></div></footer>
+  <div class="copyright">© 2026 Coisas de Gatinhas. Todos os direitos reservados.</div>
+  <script src="produtos.js"></script><script src="home-v2.js"></script>
+</body>
+</html>
