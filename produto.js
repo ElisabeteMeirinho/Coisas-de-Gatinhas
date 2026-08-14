@@ -1,6 +1,6 @@
 const id=new URLSearchParams(location.search).get('id');
 const produtos=getProdutos();const produto=produtos.find(p=>p.id===id)||produtos[0];
-if(!produto){location.href='coisasdegatinhasindex.html';}
+if(!produto){location.href='index.html';}
 document.title=produto.nome+' | Coisas de Gatinhas';
 document.getElementById('produtoImagem').src=produto.imagem;document.getElementById('produtoImagem').alt=produto.nome;document.getElementById('produtoCategoria').textContent=produto.categoria;document.getElementById('produtoNome').textContent=produto.nome;document.getElementById('produtoDescricao').textContent=produto.descricao;document.getElementById('produtoPreco').textContent=formatarPreco(produto.preco);
 const box=document.getElementById('produtoOpcoes');Object.entries(produto.opcoes||{}).forEach(([chave,valores])=>{const grupo=document.createElement('div');grupo.className='opcao-grupo';grupo.innerHTML=`<strong>${chave==='cor'?'Cor':'Tamanho'}</strong><div class="opcao-botoes">${valores.map((v,i)=>`<button type="button" data-opcao="${chave}" data-valor="${v}" class="opcao-btn ${i===0?'ativo':''}">${v}</button>`).join('')}</div>`;box.appendChild(grupo);});
