@@ -16,6 +16,54 @@
 @media(max-width:950px){.app{padding:0 12px 24px}.top{gap:8px}.main-grid{grid-template-columns:1.2fr .9fr}.generator-copy{display:none}.scene{height:290px}}
 @media(max-width:700px){.app{padding:0 9px 20px}.top{height:auto;display:grid;grid-template-columns:1fr auto;padding:12px 0;gap:8px}.brand{font-size:17px}.brand .paw{font-size:29px}.top h1{grid-column:1/3;grid-row:2;text-align:left;font-size:20px}.resources{justify-content:flex-end}.pill{font-size:10px;padding:7px 9px}.toplinks{grid-column:1/3;grid-row:3}.chapter{grid-template-columns:1fr auto;gap:8px;padding:10px}.progress{grid-column:1/3}.chapter-copy b{font-size:13px}.scene{height:300px;border-width:4px;border-radius:17px}.cat-stage{width:75%;height:72%;bottom:6%}.speech{left:7px;bottom:7px;max-width:54%;padding:7px}.speech p{font-size:9px}.speech .avatar{width:31px;height:31px;font-size:21px}.scene-top{left:8px;right:8px;top:8px}.scene-top span{font-size:8px;padding:7px}.main-grid{grid-template-columns:1fr}.heading h2{font-size:16px}.heading p{max-width:250px}.generator{padding:5px;gap:4px}.generator .boxico{font-size:21px}.primary{padding:9px 8px;font-size:9px}.board{gap:4px;padding:6px}.cell{border-radius:8px}.tile{font-size:clamp(23px,7vw,36px);border-radius:9px}.label{font-size:6px}.level{font-size:7px}.panel{padding:11px}.impact{align-items:flex-start}.ad{margin-top:30px}.side{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
+
+/* RECONSTRUCAO DE LAYOUT - composição de jogo vertical inspirada na referência aprovada */
+body{background:radial-gradient(ellipse at 50% 0%,#f7d8f2 0,#32133f 85%);padding:16px 0 32px}
+.app{max-width:1120px;padding:0 14px 28px;background:linear-gradient(180deg,#f6e4f4 0,#fff5ee 100%);border:5px solid #7a3990;border-radius:26px;box-shadow:0 18px 55px #1d0d2a88;overflow:hidden}
+.top{height:auto;min-height:82px;padding:12px 16px;background:linear-gradient(105deg,#45145f,#8d35a5 55%,#501c68);color:white;margin:0 -14px 12px}
+.brand{color:#fff}.brand small{color:#f3d9f5}.top h1{color:#fff;text-align:center;text-shadow:0 2px 3px #30103b}.pill{border:2px solid #e8c5ed;color:#4b235d;box-shadow:0 3px 0 #6e3c7b}
+.toplinks .small-link{border:2px solid #e5c5eb}
+.chapter{border:3px solid #eac5ef;box-shadow:0 5px 0 #8a4d9b;margin-bottom:12px}
+.scene{height:clamp(330px,43vw,475px);border:5px solid #fff0ff;border-radius:22px;background-color:#7b426f;background-image:linear-gradient(180deg,#0000 55%,#5a274766),radial-gradient(ellipse at 50% 85%,#e77bc9 0 22%,transparent 23%),linear-gradient(110deg,#6c326e,#d88bb5 48%,#66356f);box-shadow:0 8px 0 #a65bb2,0 12px 25px #4c245333}
+.room-bg{background:linear-gradient(90deg,#4f2a5a 0 7%,transparent 7% 93%,#4f2a5a 93%),linear-gradient(0deg,#8d5546 0 28%,#c18a76 28% 31%,transparent 31%),radial-gradient(ellipse at 50% 0%,#fff4bd 0 22%,transparent 53%),linear-gradient(115deg,#c98eaa,#f7d3c4 55%,#bb83ae)}
+.window{border-color:#8f526b}.rug{background:radial-gradient(ellipse,#dc7acb,#9146a6);border-color:#f3b4e7}
+.cat-stage{width:min(490px,62%);height:79%;bottom:2%}.cat-character{filter:drop-shadow(0 12px 8px #32133f66)}
+.speech{max-width:min(430px,48%);border:2px solid #f4cde9;box-shadow:0 5px 0 #8b5297}
+.main-grid{grid-template-columns:minmax(0,1.45fr) minmax(260px,.8fr);gap:12px}
+.panel{border:2px solid #e5c5ec;box-shadow:0 5px 0 #d7a8df,0 12px 24px #562c6815}
+.board{background:linear-gradient(135deg,#d88ce0,#a85cbb);border:3px solid #f1c8f4;padding:9px;gap:6px}
+.cell{border:2px solid #f5d8ef;border-radius:13px;background:linear-gradient(145deg,#fffaf4,#f4dfd1);box-shadow:inset 0 -4px 0 #e8c9d8}
+.tile{border-radius:14px;box-shadow:0 5px 9px #7c4b7d30,inset 0 0 0 2px #fff}
+.order{background:linear-gradient(145deg,#fffdf7,#fce8f4);border:2px solid #f0cde9;border-radius:15px;padding:10px}
+.order-ico{border:2px solid #f0d3ec;border-radius:14px}
+.deliver{background:linear-gradient(180deg,#79d947,#39a922);border:2px solid #d5ffbd;border-radius:999px}
+.restore-row{border:2px solid #ecd0e9;background:#fff8fc;border-radius:14px}
+.impact{border:2px solid #e7c3ec}
+.ad{background:#fff8;border-color:#caa3d5}
+footer{padding:14px 6px}
+@media(min-width:701px){
+ .app{max-width:980px}
+ .top{display:grid;grid-template-columns:1fr 1.2fr auto;grid-template-rows:auto auto;gap:8px}
+ .top h1{grid-column:2;grid-row:1/3;align-self:center}
+ .resources{grid-column:3;grid-row:1}
+ .toplinks{grid-column:3;grid-row:2;justify-content:flex-end}
+ .scene{height:430px}
+}
+@media(max-width:700px){
+ body{padding:0;background:#f4e4f4}
+ .app{border-radius:0;border:0;padding:0 9px 20px;box-shadow:none}
+ .top{margin:0 -9px 10px;padding:12px 10px;grid-template-columns:1fr auto;background:linear-gradient(110deg,#48175f,#9438a5)}
+ .top h1{font-size:18px}.resources{grid-column:2;grid-row:1}.toplinks{grid-column:1/3;grid-row:3}
+ .scene{height:320px;margin-bottom:12px}
+ .cat-stage{width:76%;height:74%}
+ .speech{max-width:58%;font-size:9px}
+ .main-grid{grid-template-columns:1fr}
+ .panel{padding:11px}
+ .board{gap:4px;padding:6px}
+ .cell{border-radius:9px}
+ .tile{font-size:clamp(23px,7vw,36px)}
+}
+
 </style>
 </head>
 <body><div class="app">
@@ -64,5 +112,15 @@ function restore(i){if(i!==s.room||s.stars<1)return;s.room++;s.stars--;render();
 function daily(){const today=new Date().toLocaleDateString('en-CA');if(s.daily===today||s.energy>=MAX)return;s.energy=Math.min(MAX,s.energy+5);s.daily=today;s.energyAt=Date.now();render();toast('Presente recebido: +5 de energia! ⚡')}
 let dragPointer=null;const boardRoot=$('board');boardRoot.addEventListener('pointerdown',e=>{const cell=e.target.closest('.cell');if(!cell||!s.board[Number(cell.dataset.index)])return;dragSource=Number(cell.dataset.index);dragPointer=e.pointerId;cell.classList.add('dragging')});document.addEventListener('pointerup',e=>{if(dragSource===null)return;const source=dragSource;dragSource=null;document.querySelectorAll('.cell.dragging').forEach(x=>x.classList.remove('dragging'));if(e.pointerId!==dragPointer)return;const target=document.elementFromPoint(e.clientX,e.clientY)?.closest('.cell');const dest=target?Number(target.dataset.index):-1;if(dest>=0&&dest!==source){suppressClickUntil=Date.now()+650;selected=source;tapCell(dest)}dragPointer=null});$('generate').addEventListener('click',generate);$('clear').addEventListener('click',()=>{selected=null;$('hint').textContent='Escolha duas peças iguais para combinar.';drawBoard()});$('bonus').addEventListener('click',daily);$('help').addEventListener('click',()=>$('guide').showModal());document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>$('guide').close()));$('reset').addEventListener('click',()=>{if(confirm('Recomeçar o capítulo e apagar o progresso salvo neste navegador?')){s=fresh();selected=null;render();toast('Capítulo reiniciado. Boa aventura! 🐾')}});
 render();setInterval(()=>{const old=s.energy;regen();if(old!==s.energy)render()},15000);
+})();
+</script><script>
+/* Reordena as áreas para aproximar a hierarquia da referência: pedidos, abrigo, tabuleiro e reformas */
+(function arrangeApprovedComposition(){
+ const side=document.querySelector('.side'), scene=document.querySelector('.scene'), main=document.querySelector('.main-grid');
+ if(!side||!scene||!main)return;
+ const cards=[...side.querySelectorAll(':scope > .panel')];
+ if(cards[0])scene.parentNode.insertBefore(cards[0],scene);
+ if(cards[1]){cards[1].classList.add('renovation-panel');}
+ const bonus=cards[2]; if(bonus)bonus.classList.add('bonus-panel');
 })();
 </script></body></html>
