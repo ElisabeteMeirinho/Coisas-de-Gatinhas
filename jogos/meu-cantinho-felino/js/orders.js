@@ -3,4 +3,4 @@ init(){while(S.orders.length<3)S.orders.push(Orders.make())},
 deliver(i){const o=S.orders[i];if(Board.count(o.c,o.l)<o.q)return;let n=o.q;
  S.board=S.board.map(x=>(n>0&&x&&x.c===o.c&&x.l===o.l)?(n--,null):x);
  UI.float('+'+o.coins+' moedas  +'+o.stars+' estrela');S.coins+=o.coins;S.stars+=o.stars;S.delivered++;S.orders[i]=Orders.make();
- Characters.react('happy');Reforms.check();Board.done();UI.reform()}};
+ Characters.react('happy');Reforms.check();Board.done();UI.reform();Story.onDelivery()}};
