@@ -21,8 +21,9 @@ orders(){const o=$('orders');o.innerHTML='';S.orders.forEach((r,i)=>{const n=Mat
  const t=document.createElement('div');t.className='order-meta';
  const name=document.createElement('strong');name.textContent=CHAINS[r.c][r.l];
  const qty=document.createElement('span');qty.textContent=`${n}/${r.q} necessários`;
+ const mission=document.createElement('small');mission.textContent=r.mission||'Missão do capítulo';
  const reward=document.createElement('small');reward.textContent=`+${r.coins} moedas · +${r.stars} estrela`;
- t.append(name,qty,reward);
+ t.append(name,qty,mission,reward);
  const b=document.createElement('button');b.textContent=n>=r.q?'Entregar pedido':'Entregar';b.disabled=n<r.q;b.onclick=()=>Orders.deliver(i);d.append(a,t,b);o.append(d)})},
 reform(){const n=S.reforms.length,pct=Math.round(100*n/REFORMS.length),nx=REFORMS.find(x=>!S.reforms.includes(x.id));
  let h=`<h2>Reforma do abrigo</h2><div class="thumb" style="--r:${n/REFORMS.length}"></div><div class="bar"><i style="width:${pct}%"></i></div><p>${n} de ${REFORMS.length} melhorias</p>`;
