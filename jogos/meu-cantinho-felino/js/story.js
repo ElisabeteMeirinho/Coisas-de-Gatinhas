@@ -23,7 +23,11 @@ taskIntro(){
   ['Temos uma missão importante agora: '+task[2].toLowerCase()+'.','Vou procurar os materiais. Você me ajuda a combinar tudo?'],
   ['Olha só o que falta! '+task[2]+'.','Quando terminarmos, vamos conferir como ficou. Trabalho em equipe!']
  ];
- const lines=intros[idx]||intros[1];
+ const lines=[
+   'Antes de seguir, precisamos resolver isto: '+task[2]+'. Você vem comigo?',
+   'A próxima etapa é '+task[2].toLowerCase()+'. Vamos juntar os materiais certos e descobrir o que encontramos pelo caminho!',
+   'Só falta mais um esforço: '+task[2].toLowerCase()+'. Quando terminarmos, a casa vai estar um pouquinho mais perto de voltar a acolher todos!'
+  ];
  this.taskDialog(ch,idx,who,name,lines,()=>{
    S.taskIntroKey=S.ch+'-'+idx;Save.write(S);Orders.init();UI.board();UI.orders();UI.reform();
    Characters.action('spawn');
