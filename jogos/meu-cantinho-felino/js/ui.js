@@ -29,7 +29,7 @@ reform(){const n=S.reforms.length,pct=Math.round(100*n/REFORMS.length),nx=REFORM
  REFORMS.forEach(x=>{const ok=S.reforms.includes(x.id),cur=nx&&nx.id===x.id;h+=`<div class="rf ${ok?'ok':cur?'cur':'lock'}"><b>${x.name}</b><span>${ok?'Concluída':'Entregas '+Math.min(S.delivered,x.need)+'/'+x.need}</span></div>`});
  $('reform').innerHTML=h},
 open(h){$('mbody').innerHTML=h;$('modal').hidden=false},close(){$('modal').hidden=true},
-panel(p){const P={
+panel(p){if(p==='his'){Story.library();return}const P={
  cap:`<h2>Capítulo 1: ${CAPITULO.nome}</h2><p>${CAPITULO.texto}</p><p>Entregas feitas: ${S.delivered}</p>`,
  his:'<h2>Histórias</h2>'+HISTORIAS.map(t=>`<p>${t}</p>`).join(''),
  eve:'<h2>Eventos</h2><p>Nenhum evento ativo agora. Novidades em breve.</p>',
