@@ -1,46 +1,9 @@
-<!doctype html>
-<html lang="pt-BR">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#6b2fa0">
-<title>Meu Cantinho Felino · Patinhas Play</title>
-<style>
-body{margin:0;min-height:100vh;display:grid;place-items:center;background:linear-gradient(145deg,#6b2fa0,#e9b9dc);font:600 16px system-ui;color:#3a1458}
-#loading{max-width:520px;margin:24px;padding:26px;background:#fff7;border:2px solid #fff;border-radius:22px;text-align:center;box-shadow:0 12px 40px #35104455}
-#loading strong{display:block;font-size:22px;margin-bottom:8px}#loading p{font-size:14px;line-height:1.5}
-</style>
-</head>
-<body>
-<div id="loading"><strong>🐾 Preparando o cantinho...</strong><p>Carregando os arquivos do jogo e organizando o tabuleiro.</p></div>
-<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
-<script>
-(async()=>{
- const status=document.getElementById('loading');
- try{
-  const base='./meu-cantinho-felino.zip';
-  const response=await fetch(base,{cache:'no-store'});
-  if(!response.ok)throw new Error('Não foi possível carregar o pacote do jogo ('+response.status+').');
-  const zip=await JSZip.loadAsync(await response.arrayBuffer());
-  const root='jogos/meu-cantinho-felino/';
-  const read=async path=>{const f=zip.file(root+path);if(!f)throw new Error('Arquivo ausente no pacote: '+path);return f.async('string')};
-  const html=await read('index.html');
-  const css=await read('css/style.css');
-  let data=await read('js/data.js');
-  data=data.replace('board:Array(25).fill(null)',"board:(()=>{const b=Array(25).fill(null);[['tecido',0,0],['tecido',0,1],['comida',0,5],['comida',0,6],['obra',0,10],['obra',0,11],['brinquedo',0,15],['brinquedo',0,16],['tecido',0,20],['comida',0,21]].forEach(([c,l,i])=>b[i]={c,l});return b})()");
-  const doc=new DOMParser().parseFromString(html,'text/html');
-  document.title=doc.title;
-  document.body.innerHTML=doc.body.innerHTML;
-  const style=document.createElement('style');style.textContent=css;document.head.appendChild(style);
-  const order=['js/data.js','js/save.js','js/energy.js','js/board.js','js/orders.js','js/reforms.js','js/characters.js','js/ads.js','js/ui.js','js/main.js'];
-  for(const path of order){
-   const code=path==='js/data.js'?data:await read(path);
-   const script=document.createElement('script');script.textContent=code+'\n//# sourceURL='+path;
-   document.body.appendChild(script);
-  }
- }catch(error){
-  status.innerHTML='<strong>Não foi possível abrir o jogo 😿</strong><p>'+String(error.message||error)+'</p><p>Atualize a página ou tente novamente em instantes.</p>';
- }
-})();
-</script>
-</body></html>
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Meu Cantinho Felino · Patinhas Play</title><link rel="stylesheet" href="css/style.css"></head><body>
+<div id="app"><header><div class="logo">Patinhas Play</div><h1>Meu Cantinho Felino</h1>
+<div class="hud"><button id="energy"></button><span id="coins"></span><span id="stars"></span><button id="gift">Presente</button><button id="cfg">Ajustes</button></div></header>
+<nav id="nav"><button data-p="cap">Capítulos</button><button data-p="abr">Abrigo</button><button data-p="his">Histórias</button><button data-p="eve">Eventos</button><button data-p="loj">Loja</button></nav>
+<main><section id="scene"><div id="orders"></div><div class="cats"><div id="furia" class="cat"></div><div id="suspiro" class="cat"></div></div><p id="say">Junte duas peças iguais para criar itens melhores!</p></section>
+<section id="boardWrap"><div id="board"></div><button id="box">Abrir caixa de doações (1 energia)</button></section>
+<aside id="reform"></aside></main><div id="ad-slot" hidden></div><div id="toast"></div>
+<div id="modal" hidden><div class="card"><div id="mbody"></div><button id="mclose">Fechar</button></div></div></div>
+<script src="js/data.js"></script><script src="js/save.js"></script><script src="js/energy.js"></script><script src="js/board.js"></script><script src="js/orders.js"></script><script src="js/reforms.js"></script><script src="js/characters.js"></script><script src="js/ads.js"></script><script src="js/ui.js"></script><script src="js/main.js"></script></body></html>
