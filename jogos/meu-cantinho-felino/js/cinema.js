@@ -1,30 +1,29 @@
 const Cinema={layer:null,voice:true,cc:true,step:0,opts:null,seen:false,init(){try{let s=JSON.parse(localStorage.getItem('mcf-audio')||'{}');this.voice=s.voice!==false;this.cc=s.cc!==false}catch(e){}},save(){try{localStorage.setItem('mcf-audio',JSON.stringify({voice:this.voice,cc:this.cc}))}catch(e){}},speak(t){if(!this.voice||!window.speechSynthesis)return;speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(t);u.lang='pt-BR';u.rate=.94;u.pitch=this.opts?.speakers?.[this.step]==='furia'?1.12:.98;let v=speechSynthesis.getVoices().find(x=>/^pt-BR/i.test(x.lang))||speechSynthesis.getVoices().find(x=>/^pt/i.test(x.lang));if(v)u.voice=v;speechSynthesis.speak(u)},open(o){this.close();this.opts=o;this.step=0;this.seen=false;let visual=o.visual?.[0]||'suspiro',comp=o.showFuria?'<div class="cinema-cat"><img src="assets/characters/furia.webp" alt="Fúria"></div>':'';this.layer=document.createElement('div');this.layer.id='cinema-layer';this.layer.innerHTML='<header><div><small>CAPÍTULO '+(o.chapter||'')+'</small><h2>'+o.title+'</h2></div><nav><button data-voice>'+(this.voice?'🔊 Voz':'🔇 Voz')+'</button><button data-cc>'+(this.cc?'CC Legendas':'CC Off')+'</button><button data-close>×</button></nav></header><div class="cinema-set"><div class="cinema-glow"></div><div class="cinema-object left"></div><div class="cinema-object right"></div><button class="cinema-hotspot">✦ '+(o.hotspot||'Investigar')+'</button><div class="cinema-cast"><div class="cinema-cat main-cat"><img src="assets/characters/'+visual+'.webp" alt="'+(o.names?.[0]||'Suspiro')+'"></div>'+comp+'</div></div><footer><div class="cinema-caption" '+(!this.cc?'hidden':'')+'><b id="cinema-name"></b><p id="cinema-line"></p></div><div class="cinema-next"><span id="cinema-count"></span><button data-next>Continuar ›</button></div></footer>';document.body.append(this.layer);this.layer.querySelector('[data-voice]').onclick=()=>{this.voice=!this.voice;this.save();this.layer.querySelector('[data-voice]').textContent=this.voice?'🔊 Voz':'🔇 Voz';if(!this.voice)speechSynthesis?.cancel();else this.speak(o.lines[this.step])};this.layer.querySelector('[data-cc]').onclick=()=>{this.cc=!this.cc;this.save();this.layer.querySelector('.cinema-caption').hidden=!this.cc;this.layer.querySelector('[data-cc]').textContent=this.cc?'CC Legendas':'CC Off'};this.layer.querySelector('[data-close]').onclick=()=>this.finish();this.layer.querySelector('[data-next]').onclick=()=>this.next();this.layer.querySelector('.cinema-hotspot').onclick=()=>this.investigate();this.render()},render(){let o=this.opts;this.layer.querySelector('#cinema-line').textContent=o.lines[this.step];this.layer.querySelector('#cinema-name').textContent=o.names?.[this.step]||'Suspiro';this.layer.querySelector('#cinema-count').textContent=(this.step+1)+' / '+o.lines.length;this.layer.querySelector('[data-next]').textContent=this.step===o.lines.length-1?'Ir para a tarefa ›':'Próxima fala ›';this.layer.querySelector('.cinema-hotspot').hidden=this.seen;let cat=this.layer.querySelector('.main-cat img');cat.src='assets/characters/'+(o.visual?.[this.step]||'suspiro')+'.webp';this.speak(o.lines[this.step])},investigate(){this.seen=true;this.layer.querySelector('.cinema-hotspot').hidden=true;this.layer.classList.add('found');let t=this.opts.discovery||'Você encontrou uma pista!';this.layer.querySelector('#cinema-line').textContent=t;this.speak(t)},next(){if(!this.seen&&this.opts.requireHotspot){let t='Toque no brilho do cenário para investigar antes de continuar.';this.layer.querySelector('#cinema-line').textContent=t;this.speak(t);return}if(this.step<this.opts.lines.length-1){this.step++;this.seen=false;this.layer.classList.remove('found');this.render()}else this.finish()},finish(){let cb=this.opts?.onDone;this.close();cb?.()},openFilm(onDone){
  this.close();
  const scenes=[
-  {kind:'image',src:'assets/cinematics/cena-01-casa-janela-azul.webp',caption:'Na Vila dos Ipês, uma casa antiga aguardava por um novo começo.'},
-  {kind:'video',src:'assets/cinematics/cena-02-chegada-suspiro.mp4',caption:'Um dia, Suspiro encontrou o caminho até aquela casa.'},
-  {kind:'video',src:'assets/cinematics/cena-03-descoberta-carta.mp4',caption:'Lá dentro, uma carta guardava a história daquele lugar.'}
+  {kind:'image',src:'assets/cinematics/cena-01-casa-janela-azul.webp',duration:4200},
+  {kind:'video',src:'assets/cinematics/cena-02-chegada-suspiro.mp4'},
+  {kind:'video',src:'assets/cinematics/cena-03-descoberta-carta.mp4'}
  ];
- let index=0,closed=false;
+ let index=0,finished=false,timer=null;
  this.layer=document.createElement('div');this.layer.id='cinema-layer';this.layer.classList.add('cinema-film');
- this.layer.innerHTML='<div class="film-frame" id="film-frame"></div><div class="film-caption" id="film-caption" aria-live="polite"></div>';
+ this.layer.innerHTML='<div class="film-frame" id="film-frame"><div class="film-vignette"></div></div><div class="film-progress"><i></i></div>';
  document.body.append(this.layer);
- const frame=this.layer.querySelector('#film-frame'),caption=this.layer.querySelector('#film-caption');
- const finish=()=>{if(closed)return;closed=true;const cb=onDone;this.close();cb?.()};
+ const frame=this.layer.querySelector('#film-frame'),progress=this.layer.querySelector('.film-progress i');
+ const finish=()=>{if(finished)return;finished=true;clearTimeout(timer);this.close();onDone?.()};
  const show=()=>{
-  if(closed)return;
-  const s=scenes[index];caption.textContent=s.caption;frame.replaceChildren();
+  if(finished)return;
+  const s=scenes[index];frame.classList.remove('film-fade');void frame.offsetWidth;frame.classList.add('film-fade');frame.replaceChildren();
   if(s.kind==='image'){
-   const img=document.createElement('img');img.src=s.src;img.alt='A casa da janela azul';
-   img.onload=()=>{frame.classList.add('film-enter');setTimeout(()=>{if(index===0){index++;show()}},4200)};
-   img.onerror=()=>{index++;show()};frame.append(img);
+   const img=document.createElement('img');img.src=s.src;img.alt='A casa da janela azul';img.onload=()=>{timer=setTimeout(()=>{index++;show()},s.duration)};img.onerror=()=>{index++;show()};frame.append(img);
   }else{
    const video=document.createElement('video');video.src=s.src;video.autoplay=true;video.muted=true;video.playsInline=true;video.preload='auto';video.disablePictureInPicture=true;video.controls=false;
-   video.setAttribute('playsinline','');video.setAttribute('webkit-playsinline','');
-   video.addEventListener('ended',()=>{index++;if(index<scenes.length)show();else finish()},{once:true});
-   video.addEventListener('error',()=>{caption.textContent='Não foi possível carregar esta cena. Verifique sua conexão.'},{once:true});
-   frame.append(video);const play=video.play();if(play&&play.catch)play.catch(()=>{caption.textContent='Toque na tela para iniciar a sequência.';this.layer.onclick=()=>{video.play().catch(()=>{})}});
+   video.addEventListener('ended',()=>{index++;if(index<scenes.length)show();else finish()});
+   video.addEventListener('error',()=>{index++;if(index<scenes.length)show();else finish()});
+   frame.append(video);
+   video.play().catch(()=>{const gate=document.createElement('button');gate.className='film-start';gate.textContent='Iniciar filme';gate.onclick=()=>{gate.remove();video.play().catch(finish)};frame.append(gate)});
   }
+  progress.style.width=((index)/scenes.length*100)+'%';
  };
  show();
 },
