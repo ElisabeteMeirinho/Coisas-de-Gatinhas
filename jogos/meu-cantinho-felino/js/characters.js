@@ -1,3 +1,1 @@
-const Characters={init(){[['furia','Fúria'],['suspiro','Suspiro']].forEach(([id,n])=>$(id).append(UI.art('assets/characters/'+id+'.webp',n)))},
-react(k){const m={happy:'Entrega feita! Obrigada!',party:'O abrigo ficou mais bonito!',tired:'Estamos sem energia... vamos descansar um pouquinho.'};
- ['furia','suspiro'].forEach(id=>{const e=$(id);e.classList.remove('happy','tired');void e.offsetWidth;e.classList.add(k==='tired'?'tired':'happy')});$('say').textContent=m[k]}};
+const Characters={init(){[['furia','Fúria'],['suspiro','Suspiro']].forEach(([id,n])=>$(id).append(UI.art('assets/characters/'+id+'.webp',n)));$('furia').hidden=S.ch<2},react(k){const m={happy:'Pedido entregue! Obrigada!',party:'Mais um cantinho restaurado!',tired:'Estamos sem energia... vamos descansar um pouquinho.'};['furia','suspiro'].forEach(id=>{const e=$(id);e.classList.remove('happy','tired');void e.offsetWidth;e.classList.add(k==='tired'?'tired':'happy')});$('say').textContent=m[k]||m.happy}};

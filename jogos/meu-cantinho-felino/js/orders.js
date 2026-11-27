@@ -1,6 +1,1 @@
-const Orders={make(){return{...ORDERS[Math.random()*ORDERS.length|0]}},
-init(){while(S.orders.length<3)S.orders.push(Orders.make())},
-deliver(i){const o=S.orders[i];if(Board.count(o.c,o.l)<o.q)return;let n=o.q;
- S.board=S.board.map(x=>(n>0&&x&&x.c===o.c&&x.l===o.l)?(n--,null):x);
- UI.float('+'+o.coins+' moedas  +'+o.stars+' estrela');S.coins+=o.coins;S.stars+=o.stars;S.delivered++;S.orders[i]=Orders.make();
- Characters.react('happy');Reforms.check();Board.done();UI.reform();Story.onDelivery()}};
+const Orders={init(){if(Story.done()){S.orders=[];return}if(!Array.isArray(S.orders)||!S.orders.length)S.orders=Story.cur().orders.map((x,i)=>({c:x[0],l:x[1],q:1,coins:20+i*5,stars:1,t:CHAINS[x[0]][x[1]],mission:x[2]}));Save.write(S)},deliver(i){const o=S.orders[i];if(!o||Board.count(o.c,o.l)<o.q)return;let n=o.q;S.board=S.board.map(x=>(n>0&&x&&x.c===o.c&&x.l===o.l)?(n--,null):x);S.coins+=o.coins;S.stars+=o.stars;S.orders.splice(i,1);Characters.react('happy');Reforms.check();Board.done();UI.reform();Story.onDelivery()}};
