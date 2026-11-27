@@ -137,3 +137,23 @@ main{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:14px;align-items
 @keyframes storybob{50%{transform:translateY(-7px) rotate(-2deg)}}
 @media(max-width:600px){.story-scene{min-height:230px;padding:9px;gap:5px}.story-portrait{flex-basis:34%;height:180px}.story-copy{padding:13px;margin-bottom:9px}.story-copy p{font-size:.9rem}.story-actions{padding:0 12px 12px}.story-library{padding:14px}.story-card{gap:7px}.story-card button{font-size:.72rem}}
 @media(prefers-reduced-motion:reduce){.story-portrait img{animation:none}}
+
+/* Narrativa integrada ao cenário: sem popup durante as cenas */
+#scene.story-active .cats{height:210px;position:relative;z-index:2}
+#scene.story-active .cat{transition:transform .25s,filter .25s}
+#scene.story-active .cat.story-speaker{animation:storyTalk .85s ease-in-out infinite;filter:drop-shadow(0 0 12px #ffe17b)}
+#scene.story-active .cat.story-listener{animation:storyListen 2.2s ease-in-out infinite;opacity:1}
+@keyframes storyTalk{0%,100%{transform:translateY(0) scale(1.02)}30%{transform:translateY(-13px) scale(1.07)}60%{transform:translateY(-4px) scale(1.02)}}
+@keyframes storyListen{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px) rotate(2deg)}}
+#scene.story-active #say{display:none}
+#story-stage{position:absolute!important;z-index:6;left:3%;right:3%;bottom:12px;display:flex;justify-content:center;pointer-events:none}
+.story-dialogue{width:min(720px,100%);padding:13px 16px 12px;border:3px solid #fff;border-radius:20px;background:linear-gradient(110deg,#fffaf1f5,#fce8f5f5);box-shadow:0 8px 25px #32123e55;pointer-events:auto;animation:dialogueIn .3s ease-out}
+.story-dialogue-top,.story-dialogue-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.story-speaker-name{display:inline-flex;align-items:center;padding:5px 12px;border-radius:99px;background:#74408f;color:#fff;font-weight:900}
+.story-speaker-name.suspiro{background:#b56d9d}.story-count{font-size:.75rem;color:#765b79}
+.story-dialogue p{margin:9px 0 12px;color:#503052;font-size:clamp(.9rem,2vw,1.12rem);line-height:1.4;font-weight:800}
+.story-progress{display:flex;gap:5px;flex:1}.story-progress i{height:6px;flex:1;border-radius:99px;background:#e6d3e8}.story-progress i.done{background:#a45caa}
+.story-dialogue button{background:#f3c85e;color:#56305f;font-weight:900;box-shadow:0 3px 0 #d7a83e;min-height:38px;padding:6px 18px}
+@keyframes dialogueIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:600px){#scene.story-active{min-height:340px}#scene.story-active .cats{height:205px;margin-top:4px}#story-stage{left:8px;right:8px;bottom:8px}.story-dialogue{padding:10px 12px;border-radius:16px}.story-dialogue p{font-size:.88rem;margin:7px 0 9px}.story-dialogue button{min-height:36px;padding:5px 13px}}
+@media(prefers-reduced-motion:reduce){#scene.story-active .cat{animation:none!important}}
