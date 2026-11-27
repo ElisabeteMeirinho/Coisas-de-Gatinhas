@@ -172,3 +172,20 @@ main{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:14px;align-items
 .story-card-copy{flex:1;min-width:0}.story-card-copy b{display:block;color:#503052}.story-card-copy p{margin:3px 0 0;color:#806d80;font-size:.8rem}
 .story-card button{white-space:nowrap;min-height:38px;padding:5px 12px;background:#ead9f2}
 @media(max-width:560px){#story-stage.story-library-stage{inset:6px!important;padding:10px}.story-card{gap:7px;padding:8px}.story-card-copy p{font-size:.72rem}.story-card button{font-size:.75rem;padding:4px 8px;min-height:34px}}
+
+/* Personagens ativos: ações visíveis além do piscar */
+.cat{cursor:pointer;will-change:transform;animation:catIdle 3.2s ease-in-out infinite}
+#furia{animation-delay:-.8s}
+#suspiro{animation-delay:-1.7s}
+.cat:hover{filter:drop-shadow(0 0 10px #ffe18a)}
+.cat:focus-visible{outline:3px solid var(--ouro);outline-offset:4px;border-radius:24px}
+.cat.act-curious{animation:catCurious .9s ease-in-out 2!important}
+.cat.act-play{animation:catPlay .75s cubic-bezier(.2,.8,.3,1) 3!important}
+.cat.act-happy,.cat.happy{animation:catCelebrate .55s ease-in-out 3!important}
+.cat.tired{animation:catSleep 2s ease-in-out infinite!important}
+@keyframes catIdle{0%,100%{transform:translateY(0) rotate(0) scale(1)}25%{transform:translateY(-5px) rotate(-1deg) scale(1.015)}50%{transform:translateY(0) rotate(0) scale(1)}75%{transform:translateY(-3px) rotate(1deg) scale(1.01)}}
+@keyframes catCurious{0%,100%{transform:translateX(0) rotate(0)}25%{transform:translateX(-12px) rotate(-5deg)}55%{transform:translateX(8px) rotate(4deg)}}
+@keyframes catPlay{0%,100%{transform:translateY(0) rotate(0) scale(1)}35%{transform:translateY(-34px) rotate(-9deg) scale(1.08)}65%{transform:translateY(-8px) rotate(8deg) scale(1.04)}}
+@keyframes catCelebrate{0%,100%{transform:translateY(0) scale(1)}35%{transform:translateY(-25px) scale(1.12) rotate(-4deg)}70%{transform:translateY(-5px) scale(1.05) rotate(4deg)}}
+@keyframes catSleep{0%,100%{transform:translateY(0) scaleY(.94)}50%{transform:translateY(4px) scaleY(.9)}}
+@media(prefers-reduced-motion:reduce){.cat,.cat.act-curious,.cat.act-play,.cat.act-happy{animation:none!important}}
