@@ -16,10 +16,14 @@ drag(e,i){e.preventDefault();const p=S.board[i],cells=[...document.querySelector
 tap(i){if(UI.sel==null||UI.sel===i){UI.sel=UI.sel===i?null:i}else{const a=UI.sel;UI.sel=null;Board.drop(a,i);return}
  document.querySelectorAll('#board .cell').forEach((c,k)=>c.classList.toggle('sel',k===UI.sel))},
 float(t){const f=document.createElement('div');f.className='float';f.textContent=t;$('scene').append(f);setTimeout(()=>f.remove(),1500)},
-orders(){const o=$('orders');o.innerHTML='';S.orders.forEach((r,i)=>{const n=Math.min(Board.count(r.c,r.l),r.q),d=document.createElement('div');d.className='order';
+orders(){const o=$('orders');o.innerHTML='';S.orders.forEach((r,i)=>{const n=Math.min(Board.count(r.c,r.l),r.q),d=document.createElement('article');d.className='order';
  const a=document.createElement('div');a.className='art';a.append(UI.art(`assets/items/${r.c}-${r.l}.webp`,CHAINS[r.c][r.l]));
- const t=document.createElement('div');t.textContent=`${n}/${r.q} · +${r.coins} moedas, +${r.stars} estrela`;
- const b=document.createElement('button');b.textContent='Entregar';b.disabled=n<r.q;b.onclick=()=>Orders.deliver(i);d.append(a,t,b);o.append(d)})},
+ const t=document.createElement('div');t.className='order-meta';
+ const name=document.createElement('strong');name.textContent=CHAINS[r.c][r.l];
+ const qty=document.createElement('span');qty.textContent=`${n}/${r.q} necessários`;
+ const reward=document.createElement('small');reward.textContent=`+${r.coins} moedas · +${r.stars} estrela`;
+ t.append(name,qty,reward);
+ const b=document.createElement('button');b.textContent=n>=r.q?'Entregar pedido':'Entregar';b.disabled=n<r.q;b.onclick=()=>Orders.deliver(i);d.append(a,t,b);o.append(d)})},
 reform(){const n=S.reforms.length,pct=Math.round(100*n/REFORMS.length),nx=REFORMS.find(x=>!S.reforms.includes(x.id));
  let h=`<h2>Reforma do abrigo</h2><div class="thumb" style="--r:${n/REFORMS.length}"></div><div class="bar"><i style="width:${pct}%"></i></div><p>${n} de ${REFORMS.length} melhorias</p>`;
  REFORMS.forEach(x=>{const ok=S.reforms.includes(x.id),cur=nx&&nx.id===x.id;h+=`<div class="rf ${ok?'ok':cur?'cur':'lock'}"><b>${x.name}</b><span>${ok?'Concluída':'Entregas '+Math.min(S.delivered,x.need)+'/'+x.need}</span></div>`});
