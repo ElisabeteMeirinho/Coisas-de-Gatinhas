@@ -1,0 +1,1 @@
+const Reforms={check(){REFORMS.forEach(r=>{if(S.delivered>=r.need&&!S.reforms.includes(r.id)){S.reforms.push(r.id);S.stars++;UI.toast('Reforma concluída: '+r.name);Characters.react('party')}});$('scene').dataset.r=S.reforms.length;$('scene').style.setProperty('--r',S.reforms.length/REFORMS.length)}};

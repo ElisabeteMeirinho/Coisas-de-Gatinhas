@@ -1,0 +1,2 @@
+# Recursos gráficos
+As imagens WebP de personagens, itens e cenários estão no pacote `meu-cantinho-felino.zip` e são carregadas pelo inicializador da página. Isso evita duplicar os binários no repositório.

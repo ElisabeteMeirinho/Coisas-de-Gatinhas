@@ -1,0 +1,1 @@
+/* Publicidade desativada até aprovação da plataforma. Nunca incentivar cliques em anúncios. */const Ads={enabled:false,init(){$('ad-slot').hidden=!this.enabled}};
