@@ -244,3 +244,7 @@ main{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:14px;align-items
 @keyframes cinGlow{to{opacity:.55;transform:translateX(-50%) scale(1.18)}}@keyframes cinHot{50%{box-shadow:0 0 0 14px #f4ce7022,0 0 50px #ffe9a8;transform:translate(-50%,-50%) scale(1.06)}}@keyframes cinEnter{from{opacity:0;transform:translateY(70px) scale(.9)}to{opacity:1;transform:translateY(0) scale(1)}}
 @media(max-width:600px){#cinema-layer header{padding:11px}#cinema-layer header small{font-size:.56rem}#cinema-layer nav{gap:3px}#cinema-layer nav button{font-size:.68rem;padding:5px 8px;min-height:34px}.cinema-set{inset:15% 0 22%}.cinema-cast{height:66%;gap:3vw}.cinema-cat{width:43vw}#cinema-layer footer{padding:8px 10px max(14px,env(safe-area-inset-bottom))}.cinema-caption{padding:12px 14px;border-radius:18px}.cinema-caption p{font-size:.92rem}}
 @media(prefers-reduced-motion:reduce){#cinema-layer *{animation:none!important;transition:none!important}}
+
+/* Link para prévia cinematográfica do capítulo 1 */
+.cinema-preview-link{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:8px 14px;border-radius:18px;background:var(--ouro);color:var(--roxo);text-decoration:none;font-weight:800;box-shadow:0 2px 0 #c9aedd;white-space:nowrap}
+@media(max-width:799px){.cinema-preview-link{font-size:.72rem;padding:6px 8px}}
