@@ -1,4 +1,33 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Meu Cantinho Felino · Patinhas Play</title><link rel="stylesheet" href="css/style.css"></head><body>
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Meu Cantinho Felino · Patinhas Play</title><style>:root{--roxo:#6b2fa0;--rosa:#e8479b;--lilas:#e9d5ff;--ouro:#f5b82e;--creme:#fff4e6;--tinta:#3a1458}
+*{box-sizing:border-box}body{margin:0;font:600 16px/1.3 "Trebuchet MS",system-ui,sans-serif;color:var(--tinta);background:linear-gradient(#8a4fc0,#c98ae0 60%,#f0b6d6);min-height:100vh}
+#app{max-width:1000px;margin:auto;padding:8px;padding-bottom:env(safe-area-inset-bottom)}
+header{display:flex;flex-wrap:wrap;align-items:center;gap:8px;background:var(--roxo);color:#fff;border-radius:18px;padding:8px 12px;box-shadow:0 4px 0 #43186b}
+.logo{color:var(--ouro);font-weight:900}h1{font-size:1.2rem;margin:0;flex:1}.hud{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+button{font:inherit;border:0;border-radius:999px;padding:8px 14px;min-height:44px;background:var(--lilas);color:var(--tinta);box-shadow:0 3px 0 #b794d6;cursor:pointer}
+button:disabled{opacity:.45;cursor:not-allowed}button:focus-visible{outline:3px solid var(--ouro)}
+.hud span{background:var(--creme);color:var(--tinta);border-radius:999px;padding:8px 12px}
+#nav{display:flex;gap:6px;overflow-x:auto;margin:8px 0}main{display:grid;gap:8px}
+#scene{position:relative;min-height:300px;border-radius:20px;padding:10px;background:linear-gradient(#c9a27e 0 55%,#8d5a3b 55%);box-shadow:inset 0 0 40px #0004}
+#scene[data-r="1"]{background:linear-gradient(#e8c9a0 0 55%,#8d5a3b 55%)}#scene[data-r="2"]{background:linear-gradient(#f0d9b5 0 55%,#a56a45 55%)}#scene[data-r="3"]{background:linear-gradient(#ffeccf 0 55%,#b9794f 55%)}
+#orders{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.order{background:#fff8;border:2px solid var(--ouro);border-radius:14px;padding:6px;text-align:center;font-size:.8rem}
+.order .art{height:48px}.order button{background:#3fb950;color:#fff;box-shadow:0 3px 0 #2a7d36;padding:4px 10px;min-height:36px}
+.cats{display:flex;justify-content:space-around;align-items:flex-end;height:150px;margin-top:12px}.cat{width:42%;max-width:180px;height:140px;transform-origin:bottom;animation:resp 3s ease-in-out infinite}
+#suspiro{animation-delay:-1.5s}.cat.happy{animation:pula .6s 2}.cat.tired{animation:none;opacity:.7;transform:scaleY(.85)}
+@keyframes resp{50%{transform:scale(1.03,.97)}}@keyframes pula{40%{transform:translateY(-24px)}}
+#say{margin:6px 0 0;background:#fffc;border-radius:14px;padding:8px 12px}
+#boardWrap{background:var(--roxo);border-radius:20px;padding:10px;box-shadow:0 4px 0 #43186b}
+#board{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}.cell{aspect-ratio:1;background:var(--creme);border-radius:10px;display:grid;place-items:center;touch-action:none;user-select:none}
+.cell>*{width:84%;height:84%;object-fit:contain;pointer-events:none}.ph{display:grid;place-items:center;background:var(--lilas);border:2px dashed var(--roxo);border-radius:12px;font-size:.62rem;text-align:center;overflow:hidden}
+.pop{animation:pop .4s}.shake{animation:sh .3s}@keyframes pop{40%{transform:scale(1.25);box-shadow:0 0 14px var(--ouro)}}@keyframes sh{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+.ghost{position:fixed;width:64px;height:64px;transform:translate(-50%,-50%);pointer-events:none;z-index:9;opacity:.9}.ghost>*{width:100%;height:100%}
+#box{width:100%;margin-top:8px;background:var(--ouro)}
+#reform{background:var(--creme);border-radius:20px;padding:12px;border:3px solid var(--lilas)}.bar{height:16px;background:var(--lilas);border-radius:99px;overflow:hidden}.bar i{display:block;height:100%;background:#3fb950}
+.rf{display:flex;justify-content:space-between;gap:8px;padding:8px;margin-top:6px;background:#fff;border-radius:12px}.rf.lock{opacity:.55}
+#toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--tinta);color:#fff;border-radius:99px;padding:10px 16px;opacity:0;transition:opacity .3s;pointer-events:none}#toast.on{opacity:1}
+#modal{position:fixed;inset:0;background:#000a;display:grid;place-items:center;padding:12px;z-index:20}#modal[hidden]{display:none}.card{background:var(--creme);border-radius:20px;padding:16px;max-width:420px;width:100%;max-height:85vh;overflow:auto}
+@media(min-width:800px){main{grid-template-columns:1fr 280px}#scene,#boardWrap{grid-column:1}#reform{grid-column:2;grid-row:1/3}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style></head><body>
 <div id="app"><header><div class="logo">Patinhas Play</div><h1>Meu Cantinho Felino</h1>
 <div class="hud"><button id="energy"></button><span id="coins"></span><span id="stars"></span><button id="gift">Presente</button><button id="cfg">Ajustes</button></div></header>
 <nav id="nav"><button data-p="cap">Capítulos</button><button data-p="abr">Abrigo</button><button data-p="his">Histórias</button><button data-p="eve">Eventos</button><button data-p="loj">Loja</button></nav>
@@ -6,4 +35,85 @@
 <section id="boardWrap"><div id="board"></div><button id="box">Abrir caixa de doações (1 energia)</button></section>
 <aside id="reform"></aside></main><div id="ad-slot" hidden></div><div id="toast"></div>
 <div id="modal" hidden><div class="card"><div id="mbody"></div><button id="mclose">Fechar</button></div></div></div>
-<script src="js/data.js"></script><script src="js/save.js"></script><script src="js/energy.js"></script><script src="js/board.js"></script><script src="js/orders.js"></script><script src="js/reforms.js"></script><script src="js/characters.js"></script><script src="js/ads.js"></script><script src="js/ui.js"></script><script src="js/main.js"></script></body></html>
+<script>const $=id=>document.getElementById(id);
+const CHAINS={tecido:['Retalho','Tecido organizado','Mantinha','Caminha','Caminha especial'],comida:['Ingredientes','Pote de ração','Refeição preparada','Kit de alimentação'],brinquedo:['Fio','Novelo','Brinquedo de tecido','Kit de brinquedos'],obra:['Pregos','Ferramentas','Kit de reforma']};
+const ORDERS=[{c:'comida',l:1,q:1,coins:20,stars:1},{c:'tecido',l:2,q:1,coins:30,stars:1},{c:'obra',l:1,q:2,coins:25,stars:1},{c:'brinquedo',l:2,q:1,coins:30,stars:1}];
+const REFORMS=[{id:'parede',name:'Consertar a parede',need:1},{id:'caminha',name:'Nova caminha',need:2},{id:'arranhador',name:'Arranhador',need:4}];
+const CAPITULO={nome:'Um Cantinho Seguro',texto:'Fúria e Suspiro vivem em um abrigo que precisa de cuidados. Ajude as duas a conseguir comida, tecidos, brinquedos e materiais.'};
+const HISTORIAS=['Fúria: Juntar duas peças iguais cria algo melhor!','Suspiro: Uma mantinha quentinha faz toda a diferença.','Fúria: Cada entrega deixa o abrigo mais seguro.'];
+const newState=()=>({energy:22,max:30,last:Date.now(),coins:260,stars:2,board:Array(25).fill(null),orders:[],delivered:0,reforms:[],gift:''});
+
+const Save={key:'mcf-v1',load(){try{return JSON.parse(localStorage.getItem(this.key))}catch(e){return null}},write(s){try{localStorage.setItem(this.key,JSON.stringify(s))}catch(e){}},reset(){try{localStorage.removeItem(this.key)}catch(e){}}};
+
+const Energy={REGEN:300000,
+tick(){if(S.energy>=S.max){S.last=Date.now();return}const n=Math.floor((Date.now()-S.last)/this.REGEN);if(n>0){S.energy=Math.min(S.max,S.energy+n);S.last+=n*this.REGEN;if(S.energy>=S.max)S.last=Date.now()}},
+spend(n){if(S.energy<n)return false;if(S.energy>=S.max)S.last=Date.now();S.energy-=n;return true},
+add(n){S.energy=Math.min(S.max,S.energy+n)},
+left(){if(S.energy>=S.max)return '';const s=Math.ceil((this.REGEN-(Date.now()-S.last))/1000);return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')}};
+
+const Board={
+free(){return S.board.findIndex(c=>!c)},
+spawn(){if(Board.free()<0){UI.toast('Tabuleiro cheio! Combine ou entregue peças.');return}
+ if(!Energy.spend(1)){UI.toast('Sem energia! Aguarde ou visite a Loja.');Characters.react('tired');return}
+ const k=Object.keys(CHAINS);S.board[Board.free()]={c:k[Math.random()*k.length|0],l:0};Board.done()},
+drop(a,b){if(a===b)return;const p=S.board[a],q=S.board[b];if(!p)return;
+ if(!q){S.board[b]=p;S.board[a]=null;return Board.done()}
+ if(p.c===q.c&&p.l===q.l&&p.l<CHAINS[p.c].length-1){S.board[b]={c:p.c,l:p.l+1};S.board[a]=null;return Board.done(b)}
+ UI.shake(b)},
+count(c,l){return S.board.filter(x=>x&&x.c===c&&x.l===l).length},
+done(fx){Save.write(S);UI.hud();UI.board(fx);UI.orders()}};
+
+const Orders={make(){return{...ORDERS[Math.random()*ORDERS.length|0]}},
+init(){while(S.orders.length<3)S.orders.push(Orders.make())},
+deliver(i){const o=S.orders[i];if(Board.count(o.c,o.l)<o.q)return;let n=o.q;
+ S.board=S.board.map(x=>(n>0&&x&&x.c===o.c&&x.l===o.l)?(n--,null):x);
+ S.coins+=o.coins;S.stars+=o.stars;S.delivered++;S.orders[i]=Orders.make();
+ Characters.react('happy');Reforms.check();Board.done();UI.reform()}};
+
+const Reforms={check(){REFORMS.forEach(r=>{if(S.delivered>=r.need&&!S.reforms.includes(r.id)){S.reforms.push(r.id);S.stars++;UI.toast('Reforma concluída: '+r.name);Characters.react('party')}});$('scene').dataset.r=S.reforms.length}};
+
+const Characters={init(){[['furia','Fúria'],['suspiro','Suspiro']].forEach(([id,n])=>$(id).append(UI.art('assets/characters/'+id+'.webp',n)))},
+react(k){const m={happy:'Entrega feita! Obrigada!',party:'O abrigo ficou mais bonito!',tired:'Estamos sem energia... vamos descansar um pouquinho.'};
+ ['furia','suspiro'].forEach(id=>{const e=$(id);e.classList.remove('happy','tired');void e.offsetWidth;e.classList.add(k==='tired'?'tired':'happy')});$('say').textContent=m[k]}};
+
+/* Publicidade desativada. Só ativar após aprovação da plataforma (ex.: AdSense). O espaço #ad-slot está reservado e oculto. */
+const Ads={enabled:false,init(){$('ad-slot').hidden=!this.enabled}};
+
+const UI={
+art(src,label){const i=new Image();i.src=src;i.alt=label;i.onerror=()=>{const s=document.createElement('span');s.className='ph';s.textContent=label;i.replaceWith(s)};return i},
+toast(t){const e=$('toast');e.textContent=t;e.classList.add('on');clearTimeout(UI.t);UI.t=setTimeout(()=>e.classList.remove('on'),2200)},
+hud(){const l=Energy.left();$('energy').textContent='Energia '+S.energy+'/'+S.max+(l?' · '+l:'');$('coins').textContent='Moedas '+S.coins;$('stars').textContent='Estrelas '+S.stars},
+shake(i){const c=$('board').children[i];c.classList.add('shake');setTimeout(()=>c.classList.remove('shake'),300);UI.toast('Essas peças não combinam.')},
+board(fx){const b=$('board');b.innerHTML='';S.board.forEach((p,i)=>{const c=document.createElement('div');c.className='cell';c.dataset.i=i;
+ if(p){c.append(UI.art(`assets/items/${p.c}-${p.l}.webp`,CHAINS[p.c][p.l]));if(i===fx)c.classList.add('pop');c.onpointerdown=e=>UI.drag(e,i)}b.append(c)})},
+drag(e,i){e.preventDefault();const g=e.currentTarget.cloneNode(true);g.className='ghost';document.body.append(g);
+ const mv=ev=>{g.style.left=ev.clientX+'px';g.style.top=ev.clientY+'px'};mv(e);
+ const up=ev=>{removeEventListener('pointermove',mv);removeEventListener('pointerup',up);removeEventListener('pointercancel',up);g.remove();
+  const t=document.elementFromPoint(ev.clientX,ev.clientY);const c=t&&t.closest('.cell');if(c)Board.drop(i,+c.dataset.i)};
+ addEventListener('pointermove',mv);addEventListener('pointerup',up);addEventListener('pointercancel',up)},
+orders(){const o=$('orders');o.innerHTML='';S.orders.forEach((r,i)=>{const n=Math.min(Board.count(r.c,r.l),r.q),d=document.createElement('div');d.className='order';
+ const a=document.createElement('div');a.className='art';a.append(UI.art(`assets/items/${r.c}-${r.l}.webp`,CHAINS[r.c][r.l]));
+ const t=document.createElement('div');t.textContent=`${n}/${r.q} · +${r.coins} moedas, +${r.stars} estrela`;
+ const b=document.createElement('button');b.textContent='Entregar';b.disabled=n<r.q;b.onclick=()=>Orders.deliver(i);d.append(a,t,b);o.append(d)})},
+reform(){const f=Reforms,pct=Math.round(100*S.reforms.length/REFORMS.length);let h=`<h2>Reforma do Abrigo</h2><div class="bar"><i style="width:${pct}%"></i></div><p>${S.reforms.length}/${REFORMS.length}</p>`;
+ REFORMS.forEach(r=>{const ok=S.reforms.includes(r.id);h+=`<div class="rf ${ok?'':S.delivered<r.need-1?'lock':''}"><span>${r.name}</span><span>${ok?'Feito':'Entregas: '+Math.min(S.delivered,r.need)+'/'+r.need}</span></div>`});
+ h+=`<div class="rf"><span>Antes</span><span>Depois</span></div>`;$('reform').innerHTML=h},
+open(h){$('mbody').innerHTML=h;$('modal').hidden=false},close(){$('modal').hidden=true},
+panel(p){const P={
+ cap:`<h2>Capítulo 1: ${CAPITULO.nome}</h2><p>${CAPITULO.texto}</p><p>Entregas feitas: ${S.delivered}</p>`,
+ his:'<h2>Histórias</h2>'+HISTORIAS.map(t=>`<p>${t}</p>`).join(''),
+ eve:'<h2>Eventos</h2><p>Nenhum evento ativo agora. Novidades em breve.</p>',
+ loj:`<h2>Loja</h2><p>Moedas: ${S.coins}</p><button id="buyE" ${S.coins<50?'disabled':''}>Comprar 5 de energia por 50 moedas</button>`,
+ cfg:`<h2>Ajustes</h2><button id="rst">Reiniciar progresso</button><h3>Transparência</h3><p>Instituição beneficiada: a definir.<br>Receita publicitária: sem anúncios ativos, nada registrado.<br>Custos e repasses: nenhum até o momento.</p>`};
+ if(p==='abr'){UI.close();$('scene').scrollIntoView({behavior:'smooth'});return}UI.open(P[p]);
+ const b=$('buyE');if(b)b.onclick=()=>{if(S.coins>=50){S.coins-=50;Energy.add(5);Board.done();UI.panel('loj')}};
+ const r=$('rst');if(r)r.onclick=()=>{if(confirm('Apagar todo o progresso?')){Save.reset();location.reload()}}},
+gift(){const d=new Date().toDateString();if(S.gift===d){UI.toast('Presente de hoje já coletado.');return}S.gift=d;S.coins+=20;Energy.add(3);UI.toast('Presente: +20 moedas e +3 de energia!');Board.done()}};
+
+let S=Save.load()||newState();
+Energy.tick();Orders.init();Characters.init();Ads.init();Reforms.check();
+UI.hud();UI.board();UI.orders();UI.reform();
+$('box').onclick=Board.spawn;$('gift').onclick=UI.gift;$('cfg').onclick=()=>UI.panel('cfg');$('mclose').onclick=UI.close;
+document.querySelectorAll('#nav button').forEach(b=>b.onclick=()=>UI.panel(b.dataset.p));
+setInterval(()=>{Energy.tick();UI.hud()},1000);
+</script></body></html>
