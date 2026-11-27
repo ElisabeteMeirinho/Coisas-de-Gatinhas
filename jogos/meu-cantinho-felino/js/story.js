@@ -12,7 +12,7 @@ chapters:[
 {title:'A casa dos recomeços',unlock:27,summary:'A vila se reúne para celebrar a abertura da casa restaurada.',scenes:[['suspiro','Suspiro','A casa voltou a ter vida!'],['furia','Fúria','E isso é só o começo. Ainda temos muitas aventuras pela frente!'],['lis','Lis','Já tenho ideias para a próxima melhoria!'],['pipoca','Pipoca','Esta casa nunca mais ficará vazia!']],orders:[['comida',3,'Preparar os petiscos da inauguração'],['tecido',1,'Finalizar os últimos detalhes acolhedores'],['brinquedo',3,'Preparar presentes para as primeiras patinhas']],reward:'Temporada 1 concluída! A Casa dos Recomeços está aberta. Em breve: O Mistério da Vila dos Ipês.'}
 ],
 cur(){return this.chapters[Math.min(S.ch,9)]},done(){return S.ch>=10},
-init(){this.unlock();if(S.ch>=10)return;if(!S.storySeen[S.ch]&&S.chapterProgress===0)setTimeout(()=>this.play(S.ch,()=>this.taskIntro()),650);else if(!S.orders.length)setTimeout(()=>this.taskIntro(),450)},
+init(){this.unlock();if(S.ch>=10)return;if(!S.storySeen[S.ch]&&S.chapterProgress===0)setTimeout(()=>this.play(S.ch,()=>this.taskIntro()),650);else if(S.taskIntroKey!==S.ch+'-'+S.chapterProgress)setTimeout(()=>this.taskIntro(),450)},
 taskIntro(){
  if(this.done())return;
  const ch=this.cur(),idx=S.chapterProgress,task=ch.orders[idx];if(!task)return;
