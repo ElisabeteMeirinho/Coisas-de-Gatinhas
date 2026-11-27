@@ -157,3 +157,18 @@ main{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:14px;align-items
 @keyframes dialogueIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:600px){#scene.story-active{min-height:340px}#scene.story-active .cats{height:205px;margin-top:4px}#story-stage{left:8px;right:8px;bottom:8px}.story-dialogue{padding:10px 12px;border-radius:16px}.story-dialogue p{font-size:.88rem;margin:7px 0 9px}.story-dialogue button{min-height:36px;padding:5px 13px}}
 @media(prefers-reduced-motion:reduce){#scene.story-active .cat{animation:none!important}}
+
+/* Capítulos selecionados diretamente no palco do jogo, sem modal */
+#story-stage.story-library-stage{inset:10px!important;bottom:10px!important;left:10px!important;right:10px!important;display:block!important;overflow:auto;pointer-events:auto;background:linear-gradient(145deg,#fff9f0f5,#f6e4f4f5);border:3px solid #fff;border-radius:18px;padding:14px;box-shadow:0 8px 24px #32123e55}
+.story-library-inline{max-width:760px;margin:auto}
+.story-library-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}
+.story-library-heading small{color:#a45caa;font-weight:900;letter-spacing:.08em}
+.story-library-heading h2{font-size:clamp(1.05rem,2.5vw,1.45rem);margin:4px 0;color:#56305f}
+.story-library-heading p{margin:0;color:#745c75;font-size:.88rem}
+.story-library-heading #story-library-close{min-width:38px;min-height:38px;padding:4px 10px;font-size:1.4rem}
+.story-library-cards{display:grid;gap:8px}
+.story-card{display:flex;align-items:center;gap:10px;padding:10px;border:1px solid #e8d5e9;border-radius:14px;background:#fff}
+.story-card .num{display:grid;place-items:center;flex:0 0 34px;height:34px;border-radius:50%;background:#f1def1;color:#74408f;font-weight:900}
+.story-card-copy{flex:1;min-width:0}.story-card-copy b{display:block;color:#503052}.story-card-copy p{margin:3px 0 0;color:#806d80;font-size:.8rem}
+.story-card button{white-space:nowrap;min-height:38px;padding:5px 12px;background:#ead9f2}
+@media(max-width:560px){#story-stage.story-library-stage{inset:6px!important;padding:10px}.story-card{gap:7px;padding:8px}.story-card-copy p{font-size:.72rem}.story-card button{font-size:.75rem;padding:4px 8px;min-height:34px}}
